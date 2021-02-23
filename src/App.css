@@ -1,6 +1,9 @@
 .App {
+  /* border: 2px solid red; */
+  height: 100vh !important;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
