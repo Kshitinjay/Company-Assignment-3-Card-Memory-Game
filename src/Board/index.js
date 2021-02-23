@@ -32,7 +32,14 @@ export default class Board extends Component {
       firstClickId: null,
       total: emojis.length/2,
       score: 1,
+      counter: 0,
     };
+  }
+
+  startCounter(){
+    setInterval(()=>{
+      this.setState({counter: this.state.counter+1})
+    },1000)
   }
 
   actualFlipping(idx, faceUp) {
@@ -66,7 +73,7 @@ export default class Board extends Component {
         }   
       } else {
         setTimeout(() => {
-          console.log("firstClickId", this.state.firstClickId);
+          // console.log("firstClickId", this.state.firstClickId);
           this.actualFlipping(this.state.firstClickId);
           this.actualFlipping(idx);
           this.setState({ firstClickId: null });
@@ -97,6 +104,8 @@ export default class Board extends Component {
             })}
           </div>
         </div>
+        <h4 className="mt-3">{this.state.counter}s</h4>
+        <button className="btn btn-primary mt-2" onClick={()=>{this.startCounter()}}>Start Game</button>
       </div>
     );
   }
