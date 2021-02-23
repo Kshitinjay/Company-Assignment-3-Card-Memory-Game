@@ -9,7 +9,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: transform 1s;
 }
 .card:hover{
   cursor: pointer;
+}
+.face-up{
+  transform: rotateY(180deg);
 }

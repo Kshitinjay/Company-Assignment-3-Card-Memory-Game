@@ -15,13 +15,13 @@ class Card extends Component {
   render() {
     let status;
     if (!this.state.faceUp) {
-      status = "back";
+      status = "";
     } else {
       status = this.props.status;
     }
     return (
       <div
-        className="card"
+        className={`card ${this.state.faceUp ? "face-up" : ""}`}
         onClick={() => {
           this.flip();
         }}
