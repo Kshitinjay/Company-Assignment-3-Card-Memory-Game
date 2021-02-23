@@ -19,7 +19,7 @@ const Board = () => {
   return (
     <div>
       <h1>Card-Memory-Game</h1>
-      <div className="d-flex mt-5">
+      <div className="d-flex justify-content-center mt-5">
         <div className="card-container  mt-4">
           {emojis.map((elem) => {
             return <Card status={elem} />;
