@@ -35,7 +35,7 @@ export default class Board extends Component {
       counter: 0,
     };
   }
-
+  
   startCounter(){
     setInterval(()=>{
       this.setState({counter: this.state.counter+1})
@@ -69,7 +69,7 @@ export default class Board extends Component {
       if (firstCardData === secondCardData) {
         this.setState({ firstClickId: null, score: this.state.score + 1 });
         if(this.state.total===this.state.score){
-          alert("You win");
+          alert(`Congratulations! you have solved this in ${this.state.counter}s`);
         }   
       } else {
         setTimeout(() => {
