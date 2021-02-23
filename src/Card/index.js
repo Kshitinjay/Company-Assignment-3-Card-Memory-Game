@@ -1,30 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import "./card.css";
-class Card extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      faceUp: false,
-    };
-  }
-  flip() {
-    this.setState({
-      faceUp: !this.state.faceUp,
-    });
-  }
+
+class Card extends React.Component {
   render() {
     let status;
-    if (!this.state.faceUp) {
-      status = "";
-    } else {
+    if (this.props.faceUp) {
       status = this.props.status;
+    } else {
+      status = "";
     }
     return (
       <div
-        className={`card ${this.state.faceUp ? "face-up" : ""}`}
-        onClick={() => {
-          this.flip();
-        }}
+        onClick={this.props.flip}
+        className={`card ${this.props.faceUp ? "face-up" : ""}`}
       >
         {status}
       </div>
