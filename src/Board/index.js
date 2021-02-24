@@ -112,7 +112,7 @@ export default class Board extends Component {
           </div>
         </div>
         <h4 className="mt-3">{this.state.counter}s</h4>
-        <button className="btn btn-primary mt-2" onClick={()=>{this.startCounter()}}>Start Game</button>
+        <button className="btn  mt-2" onClick={()=>{this.startCounter()}}>Start Game</button>
       </div>
     );
   }
