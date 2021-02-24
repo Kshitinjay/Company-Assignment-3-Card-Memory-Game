@@ -33,13 +33,16 @@ export default class Board extends Component {
       total: emojis.length/2,
       score: 1,
       counter: 0,
+      timer:null,
+      onOff:false,
     };
   }
   
   startCounter(){
-    setInterval(()=>{
-      this.setState({counter: this.state.counter+1})
-    },1000)
+    this.setState({onOff:!this.state.onOff})
+      this.state.timer = setInterval(()=>{
+        this.setState({counter: this.state.counter+1})
+      },1000)
   }
 
   actualFlipping(idx, faceUp) {
@@ -59,29 +62,33 @@ export default class Board extends Component {
   }
 
   flip(idx, faceUp) {
-    // console.log("firstClickId", this.state.firstClickId);
-    if (this.state.firstClickId === null) {
-      this.setState({ firstClickId: idx });
-    } else {
-      const firstCardData = this.state.emojiToShow[this.state.firstClickId].content;
-      const secondCardData = this.state.emojiToShow[idx].content;
-      // console.log(`first data: ${firstCardData} second data ${secondCardData}`);
-      if (firstCardData === secondCardData) {
-        this.setState({ firstClickId: null, score: this.state.score + 1 });
-        if(this.state.total===this.state.score){
-          alert(`Congratulations! you have solved this in ${this.state.counter}s`);
-        }   
+    if(this.state.onOff===true){
+      console.log("clicked on", idx);
+      if (this.state.firstClickId === null) {
+        this.setState({ firstClickId: idx });
       } else {
-        setTimeout(() => {
-          // console.log("firstClickId", this.state.firstClickId);
-          this.actualFlipping(this.state.firstClickId);
-          this.actualFlipping(idx);
-          this.setState({ firstClickId: null });
-        }, 2000);
+        const firstCardData = this.state.emojiToShow[this.state.firstClickId].content;
+        const secondCardData = this.state.emojiToShow[idx].content;
+        // console.log(`first data: ${firstCardData} second data ${secondCardData}`);
+        if (firstCardData === secondCardData) {
+          this.setState({ firstClickId: null, score: this.state.score + 1 });
+          if(this.state.total===this.state.score){
+            clearInterval(this.state.timer);
+            alert(`Congratulations! you have solved this in ${this.state.counter}s`);
+          }   
+        } else {
+          setTimeout(() => {
+            // console.log("firstClickId", this.state.firstClickId);
+            this.actualFlipping(this.state.firstClickId);
+            this.actualFlipping(idx);
+            this.setState({ firstClickId: null });
+          }, 2000);
+        }
       }
+      // console.log("firstClickId", this.state.firstClickId);
+      this.actualFlipping(idx, !this.state.emojiToShow[idx].faceUp);
     }
-    // console.log("firstClickId", this.state.firstClickId);
-    this.actualFlipping(idx, !this.state.emojiToShow[idx].faceUp);
+    
   }
 
   render() {
